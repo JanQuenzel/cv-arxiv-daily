@@ -287,12 +287,6 @@ def json_to_md(filename,md_filename,
         if (use_title == True) and (to_web == True):
             f.write("---\n" + "layout: default\n" + "---\n\n")
 
-        # if show_badge == True:
-        #     f.write(f"[![Contributors][contributors-shield]][contributors-url]\n")
-        #     f.write(f"[![Forks][forks-shield]][forks-url]\n")
-        #     f.write(f"[![Stargazers][stars-shield]][stars-url]\n")
-        #     f.write(f"[![Issues][issues-shield]][issues-url]\n\n")
-
         if use_title == True:
             #f.write(("<p align="center"><h1 align="center"><br><ins>CV-ARXIV-DAILY"
             #         "</ins><br>Automatically Update CV Papers Daily</h1></p>\n"))
@@ -346,25 +340,6 @@ def json_to_md(filename,md_filename,
                 top_info = top_info.replace(' ','-').replace('.','')
                 f.write(f"<p align=right>(<a href={top_info.lower()}>back to top</a>)</p>\n\n")
 
-        if show_badge == True:
-            # we don't like long string, break it!
-            f.write((f"[contributors-shield]: https://img.shields.io/github/"
-                     f"contributors/Vincentqyw/cv-arxiv-daily.svg?style=for-the-badge\n"))
-            f.write((f"[contributors-url]: https://github.com/Vincentqyw/"
-                     f"cv-arxiv-daily/graphs/contributors\n"))
-            f.write((f"[forks-shield]: https://img.shields.io/github/forks/Vincentqyw/"
-                     f"cv-arxiv-daily.svg?style=for-the-badge\n"))
-            f.write((f"[forks-url]: https://github.com/Vincentqyw/"
-                     f"cv-arxiv-daily/network/members\n"))
-            f.write((f"[stars-shield]: https://img.shields.io/github/stars/Vincentqyw/"
-                     f"cv-arxiv-daily.svg?style=for-the-badge\n"))
-            f.write((f"[stars-url]: https://github.com/Vincentqyw/"
-                     f"cv-arxiv-daily/stargazers\n"))
-            f.write((f"[issues-shield]: https://img.shields.io/github/issues/Vincentqyw/"
-                     f"cv-arxiv-daily.svg?style=for-the-badge\n"))
-            f.write((f"[issues-url]: https://github.com/Vincentqyw/"
-                     f"cv-arxiv-daily/issues\n\n"))
-
     logging.info(f"{task} finished")
 
 def demo(**config):
@@ -375,8 +350,7 @@ def demo(**config):
     keywords = config['kv']
     max_results = config['max_results']
     publish_readme = config['publish_readme']
-    publish_gitpage = config['publish_gitpage']
-    publish_wechat = config['publish_wechat']
+    publish_gitpage = config['publish_gitpage'
     show_badge = config['show_badge']
 
     b_update = config['update_paper_links']
@@ -418,18 +392,6 @@ def demo(**config):
         json_to_md(json_file, md_file, task ='Update GitPage', \
             to_web = True, show_badge = show_badge, \
             use_tc=False, use_b2t=False)
-
-    # 3. Update docs/wechat.md file
-    if publish_wechat:
-        json_file = config['json_wechat_path']
-        md_file   = config['md_wechat_path']
-        # TODO: duplicated update paper links!!!
-        if config['update_paper_links']:
-            update_paper_links(json_file)
-        else:
-            update_json_file(json_file, data_collector_web)
-        json_to_md(json_file, md_file, task ='Update Wechat', \
-            to_web=False, use_title= False, show_badge = show_badge)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
