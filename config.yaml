@@ -37,3 +37,9 @@ keywords:
                   "Line Segment Detection", "Local Feature Matching"]
     "NeRF":
         filters: ["NeRF"]
+    "GS":
+        filters: ["GS","Gaussian Splatting"]
+    "VINS":
+        filters: ["VINS","VIO"]
+    "LIO":
+        filters: ["LiDAR","LIO","Lidar Odometry"]
